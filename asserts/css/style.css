@@ -130,7 +130,8 @@ header .depth2 a {
   display: block;
   height: 100%;
   line-height: 50px;
-  letter-spacing: -0.5px;
+  letter-spacing: -1px;
+  font-size: 0.9em;
 }
 
 header .depth2 a:hover {
