@@ -1,10 +1,12 @@
 @import url(reset.css);
+@import url(animate.css);
 
 body {
   font-family: "Roboto", sans-serif;
   height: 200vh;
 }
 
+/*Header*/
 header {
   position: fixed;
   top: 0;
@@ -21,12 +23,18 @@ header.active {
   background: #fff;
 }
 
+header.scroll {
+  background: #fff;
+  box-shadow: 0 1px 30px #ccc;
+}
+
 header .container {
   height: 100px;
   position: relative;
 }
 
-header.active .container {
+header.active .container,
+header.scroll .container {
   border-bottom: 1px solid #eee;
 }
 
@@ -41,7 +49,8 @@ header .logo {
     contain;
 }
 
-header.active .logo {
+header.active .logo,
+header.scroll .logo {
   background: transparent url(../images/logo-ite-bl.png) no-repeat center /
     contain;
 }
@@ -71,6 +80,10 @@ header .btn_menu .wrap span {
 }
 
 header .btn_menu .wrap.active span {
+  background: #000;
+}
+
+header.scroll .btn_menu .wrap span {
   background: #000;
 }
 
@@ -112,6 +125,10 @@ header.active .depth1 .menu:hover {
   color: var(--blue);
 }
 
+header.scroll .depth1 .menu {
+  color: #000;
+}
+
 header .depth1 > li {
   flex: 1;
   text-align: center;
@@ -139,6 +156,7 @@ header .depth2 a:hover {
   font-weight: 700;
 }
 
+/*Section1*/
 .sec1 {
   height: 100vh;
   position: relative;
@@ -167,11 +185,17 @@ header .depth2 a:hover {
 .sec1 .text_wrap p {
   font-size: 1.7em;
   white-space: nowrap;
+  transform: translateY(10px);
+  opacity: 0;
+  animation: fadeIn 0.2s 0.2s linear forwards;
 }
 
 .sec1 .text_wrap h1 {
   display: inline-block;
   font-size: 3.5em;
+  transform: translateY(10px);
+  opacity: 0;
+  animation: fadeIn 0.2s 0.4s linear forwards;
 }
 
 .sec1 .text_wrap h1:last-child {
@@ -197,6 +221,9 @@ header .depth2 a:hover {
   border-radius: 20px;
   border: 1px solid #aaa;
   position: relative;
+  transform: translateY(10px);
+  opacity: 0;
+  animation: fadeIn 0.2s 0.6s linear forwards;
 }
 
 .sec1 .scroll_icon:after {
@@ -212,14 +239,113 @@ header .depth2 a:hover {
   animation: animate_wheel 1.3s ease-out infinite;
 }
 
-@keyframes animate_wheel {
-  to {
-    top: 18px;
-    opacity: 0;
-  }
+.sec1 .scroll_text {
+  transform: translateY(10px);
+  opacity: 0;
+  animation: fadeIn 0.2s 0.8s linear forwards;
+}
+
+/*Section2*/
+.sec2 {
+  padding-top: 160px;
+  margin: 0 40px;
+}
+
+.sec2 .title h2 {
+  font-size: 3em;
+  color: #222;
+}
+
+.sec2 .title p {
+  padding-left: 130px;
+  margin-top: 10px;
+  font-size: 1.1em;
+  line-height: 1.6;
+  max-width: 75%;
+  position: relative;
+}
+
+.sec2 .title p:before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 5px;
+  width: 100px;
+  height: 4px;
+  background: var(--blue);
+}
+
+.sec2 .content_wrap {
+  padding: 160px 0 240px;
+  position: relative;
+}
+
+.sec2 .mark_top,
+.sec2 .mark_bottom {
+  position: absolute;
+  width: 50%;
+  height: 120px;
+}
+/*mark_top mark_bottom : BG(MasK) add*/
+
+.sec2 .mark_top {
+  top: 100px;
+}
+
+.sec2 .mark_bottom {
+  bottom: 160px;
+}
+
+.sec2 .content {
+  display: inline-block;
+  width: 100%;
+  position: relative;
+}
+
+.sec2 .content:not(.content1) {
+  margin-top: 180px;
+}
+
+.sec2 .content img {
+  width: 68%;
+}
+
+.sec2 .content:nth-child(2n + 1) img {
+  float: right;
+}
+
+.sec2 .content .descript {
+  position: absolute;
+  top: 70%;
+  width: 50%;
+  padding: 30px;
+  text-align: right;
+  background: #fff;
+  box-shadow: 2px 2px 5px #aaa;
+}
+
+.sec2 .content .descript h3 {
+  font-size: 1.5em;
+  margin-bottom: 5px;
+}
+
+.sec2 .content .descript p {
+  line-height: 2;
+  font-size: 1.1em;
+  word-break: keep-all;
+}
+
+.sec2 .content:nth-child(2n + 1) .descript {
+  left: 0;
+}
+
+.sec2 .content:nth-child(2n + 2) .descript {
+  right: 0;
+  text-align: left;
 }
 
 @media screen and (max-width: 768px) {
+  /*Header*/
   header {
     height: 70px;
   }
@@ -330,6 +456,7 @@ header .depth2 a:hover {
     font-weight: 700;
   }
 
+  /*Section1*/
   .sec1 {
     background: url(../images/img_header_mobile.jpg) no-repeat;
     background-size: cover;
@@ -382,5 +509,32 @@ header .depth2 a:hover {
     transform: translate(-50%, -50%);
     background: #aaa;
     animation: animate_wheel 1.3s ease-out infinite;
+  }
+
+  /*Section2*/
+  .sec2 {
+    padding-top: 120px;
+  }
+
+  .sec2 .title h2 {
+    font-size: 2em;
+  }
+
+  .sec2 .title p {
+    padding-left: 40px;
+    font-size: 1em;
+    line-height: 1.3;
+    max-width: 100%;
+    position: relative;
+  }
+
+  .sec2 .title p:before {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 5px;
+    width: 30px;
+    height: 4px;
+    background: var(--blue);
   }
 }

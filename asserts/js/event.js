@@ -1,3 +1,8 @@
+window.onscroll = () => {
+  if (window.scrollY > 0) header.classList.add("scroll");
+  else header.classList.remove("scroll");
+};
+
 window.onresize = () => {
   if (window.innerWidth < 768) {
   } else {

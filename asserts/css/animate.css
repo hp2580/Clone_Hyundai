@@ -1,0 +1,14 @@
+/*스크롤로 섹션에 도달하면 요소를 fadeIn하는 animation*/
+@keyframes fadeIn {
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes animate_wheel {
+  to {
+    top: 18px;
+    opacity: 0;
+  }
+}
