@@ -1,1 +1,385 @@
 @import url(reset.css);
+
+body {
+  font-family: "Roboto", sans-serif;
+  height: 200vh;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100px;
+  overflow: hidden;
+  z-index: 10;
+  transition: all 0.3s;
+}
+
+header.active {
+  height: 400px;
+  background: #fff;
+}
+
+header .container {
+  height: 100px;
+  position: relative;
+}
+
+header.active .container {
+  border-bottom: 1px solid #eee;
+}
+
+header .logo {
+  display: inline-block;
+  width: 150px;
+  height: 60px;
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: transparent url(../images/logo-ite-wh.png) no-repeat center /
+    contain;
+}
+
+header.active .logo {
+  background: transparent url(../images/logo-ite-bl.png) no-repeat center /
+    contain;
+}
+
+header .btn_menu {
+  display: none;
+  position: absolute;
+  top: 20px;
+  right: 20px;
+}
+
+header .btn_menu .wrap {
+  position: relative;
+  width: 40px;
+  height: 28px;
+  cursor: pointer;
+}
+
+header .btn_menu .wrap span {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  transform-origin: top;
+  transition: 0.3s;
+}
+
+header .btn_menu .wrap.active span {
+  background: #000;
+}
+
+header .btn_menu .wrap span:nth-child(1) {
+  top: 1px;
+}
+
+header .btn_menu .wrap span:nth-child(2) {
+  top: 50%;
+}
+
+header .btn_menu .wrap span:nth-child(3) {
+  bottom: 0;
+}
+
+header nav {
+  margin-left: 200px;
+  height: 100%;
+}
+
+header .depth1 {
+  display: flex;
+}
+
+header .depth1 .menu {
+  display: block;
+  color: #fff;
+  height: 100px;
+  line-height: 100px;
+  font-size: 1.4em;
+  font-weight: 600;
+}
+
+header.active .depth1 .menu {
+  color: #000;
+}
+
+header.active .depth1 .menu:hover {
+  color: var(--blue);
+}
+
+header .depth1 > li {
+  flex: 1;
+  text-align: center;
+}
+
+header .depth2 {
+  height: 300px;
+  padding-top: 25px;
+}
+
+header .depth2 > li {
+  height: 50px;
+}
+
+header .depth2 a {
+  display: block;
+  height: 100%;
+  line-height: 50px;
+  letter-spacing: -0.5px;
+}
+
+header .depth2 a:hover {
+  color: var(--blue);
+  font-weight: 700;
+}
+
+.sec1 {
+  height: 100vh;
+  position: relative;
+}
+
+.sec1 .video_wrap {
+  height: 100%;
+}
+
+.sec1 video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  mix-blend-mode: screen;
+}
+
+.sec1 .text_wrap {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+  color: #fff;
+}
+
+.sec1 .text_wrap p {
+  font-size: 1.7em;
+  white-space: nowrap;
+}
+
+.sec1 .text_wrap h1 {
+  display: inline-block;
+  font-size: 3.5em;
+}
+
+.sec1 .text_wrap h1:last-child {
+  margin-left: 10px;
+}
+
+.sec1 .scroll_wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translate(-50%, 0);
+  color: #aaa;
+  font-size: 0.75em;
+  gap: 6px 0;
+}
+
+.sec1 .scroll_icon {
+  width: 30px;
+  height: 45px;
+  border-radius: 20px;
+  border: 1px solid #aaa;
+  position: relative;
+}
+
+.sec1 .scroll_icon:after {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 50%;
+  width: 2px;
+  height: 8px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  background: #aaa;
+  animation: animate_wheel 1.3s ease-out infinite;
+}
+
+@keyframes animate_wheel {
+  to {
+    top: 18px;
+    opacity: 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  header {
+    height: 70px;
+  }
+
+  header.active {
+    height: 100vh;
+  }
+
+  header .container {
+    height: 70px;
+  }
+
+  header .logo {
+    top: 10px;
+    width: 120px;
+    height: 46px;
+  }
+
+  header .btn_menu {
+    display: block;
+  }
+
+  header nav {
+    margin-left: 0;
+    height: auto;
+    width: 100%;
+    position: absolute;
+    top: 70px;
+    padding-top: 80px;
+  }
+
+  header .depth1 {
+    flex-direction: column;
+    margin: 0 40px;
+  }
+
+  header .depth1 .menu {
+    height: 70px;
+    line-height: 70px;
+    font-size: 1.5em;
+  }
+
+  header.active .depth1 .menu {
+    color: #000;
+    position: relative;
+  }
+
+  header.active .depth1 .menu.active {
+    color: var(--blue);
+  }
+
+  header.active .depth1 .menu:after,
+  header.active .depth1 .menu:before {
+    content: "";
+    position: absolute;
+    top: calc(50% - 2px);
+    right: 0;
+    width: 25px;
+    height: 2px;
+    background: #000;
+  }
+
+  header.active .depth1 .menu.active:after,
+  header.active .depth1 .menu.active:before {
+    background: var(--blue);
+  }
+
+  header.active .depth1 .menu:after {
+    transform: rotate(90deg);
+    transition: 0.3s;
+  }
+
+  header.active .depth1 .menu.active:after {
+    transform: rotate(0);
+  }
+
+  header.active .depth1 .menu:hover {
+    color: var(--blue);
+  }
+
+  header.active .depth1 .menu:hover:after,
+  header.active .depth1 .menu:hover:before {
+    background: var(--blue);
+  }
+
+  header .depth1 > li {
+    text-align: left;
+  }
+
+  header .depth2 {
+    height: 0;
+    overflow: hidden;
+    padding-top: 0;
+    padding-left: 30px;
+  }
+
+  header .depth2.active {
+    height: fit-content;
+  }
+
+  header .depth2 a {
+    color: #aaa;
+    position: relative;
+  }
+
+  header .depth2 a:hover {
+    color: var(--blue);
+    font-weight: 700;
+  }
+
+  .sec1 {
+    background: url(../images/img_header_mobile.jpg) no-repeat;
+    background-size: cover;
+  }
+
+  .sec1 .video_wrap {
+    display: none;
+  }
+
+  .sec1 .text_wrap p {
+    font-size: 1.4em;
+  }
+
+  .sec1 .text_wrap h1 {
+    display: inline-block;
+    font-size: 3.2em;
+    line-height: 1;
+    letter-spacing: 1px;
+  }
+
+  .sec1 .scroll_wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    color: #aaa;
+    font-size: 0.75em;
+    gap: 6px 0;
+  }
+
+  .sec1 .scroll_icon {
+    width: 30px;
+    height: 45px;
+    border-radius: 20px;
+    border: 1px solid #aaa;
+    position: relative;
+  }
+
+  .sec1 .scroll_icon:after {
+    content: "";
+    position: absolute;
+    top: 10px;
+    left: 50%;
+    width: 2px;
+    height: 8px;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    background: #aaa;
+    animation: animate_wheel 1.3s ease-out infinite;
+  }
+}
