@@ -2,6 +2,9 @@ let header = document.querySelector("header");
 let btnWrap = document.querySelector(".btn_menu");
 let menus = document.querySelectorAll(".menu");
 let btnMenu = btnWrap.children[0];
+let btnSlides = document.querySelectorAll(".btn_slide");
+let slide = document.querySelector(".slide_wrap ul");
+let currentSlide = 0;
 
 header.addEventListener("mouseenter", () => {
   if (window.innerWidth > 768) {
@@ -45,6 +48,20 @@ for (let menu of menus) {
       menu.classList.add("active");
       menu.nextElementSibling.classList.add("active");
     }
+  });
+}
+
+for (let btnSlide of btnSlides) {
+  let slideWidth = slide.getBoundingClientRect().width / slide.children.length;
+  btnSlide.addEventListener("click", (e) => {
+    if (e.target.classList.contains("btn_prev")) {
+      currentSlide += slideWidth;
+      if (currentSlide > 0) currentSlide = -(slideWidth * 4);
+    } else {
+      currentSlide -= slideWidth;
+      if (currentSlide < -(slideWidth * 4)) currentSlide = 0;
+    }
+    slide.style.transform = `translateX(${currentSlide}px)`;
   });
 }
 

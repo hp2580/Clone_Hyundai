@@ -14,7 +14,7 @@ header {
   width: 100%;
   height: 100px;
   overflow: hidden;
-  z-index: 10;
+  z-index: 100;
   transition: all 0.3s;
 }
 
@@ -376,6 +376,166 @@ header .depth2 a:hover {
 .sec2 .content:nth-child(2n + 2) .descript {
   right: 0;
   text-align: left;
+}
+
+/*Section3*/
+.sec3 {
+  padding: 160px 0 120px;
+  margin: 0 40px;
+  overflow: hidden;
+}
+
+/* .sec3 .title.scroll * {
+  animation: fadeIn 0.4s linear forwards;
+} */
+
+.sec3 .title h2 {
+  font-size: 3em;
+  color: #222;
+}
+
+.sec3 .title p {
+  padding-left: 130px;
+  margin-top: 10px;
+  font-size: 1.1em;
+  line-height: 1.6;
+  max-width: 75%;
+  position: relative;
+}
+
+.sec3 .title p:before {
+  content: "";
+  position: absolute;
+  top: 10px;
+  left: 5px;
+  width: 100px;
+  height: 4px;
+  background: var(--blue);
+}
+
+.sec3 .slide_wrap {
+  padding: 120px 30px;
+  margin: 0 30px;
+  overflow: hidden;
+  position: relative;
+}
+
+.sec3 .btn_slide {
+  position: absolute;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 40px;
+  height: 40px;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.sec3 .btn_slide span {
+  display: block;
+  position: relative;
+}
+
+.sec3 .btn_slide span:after,
+.sec3 .btn_slide span:before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #aaa;
+  transform-origin: left;
+}
+
+.sec3 .btn_next span:after,
+.sec3 .btn_next span:before {
+  transform-origin: right;
+}
+
+.sec3 .btn_slide span:after {
+  transform: rotate(45deg);
+}
+
+.sec3 .btn_slide span:before {
+  transform: rotate(-45deg);
+}
+
+.sec3 .btn_next {
+  right: 0;
+}
+
+.sec3 .slide_wrap ul {
+  display: flex;
+  width: 165%;
+  transition: all 0.3s;
+}
+
+.sec3 .slide {
+  flex: 1;
+  height: 360px;
+  margin: 0 40px;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  border-radius: 20px;
+  filter: brightness(0.7);
+}
+
+.sec3 .slide.active {
+  transform: scale(1.2);
+  filter: unset;
+}
+
+.sec3 .descript_wrap {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: #fff;
+  width: 100%;
+  height: 100%;
+}
+
+.sec3 .descript_wrap h2 {
+  font-size: 1.125em;
+}
+
+.sec3 .descript_wrap button {
+  background: #fff;
+  color: var(--blue);
+  font-weight: 600;
+  padding: 7px 20px;
+  border-radius: 20px;
+  margin-top: 10px;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.sec3 .descript_wrap button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 20px #fff;
+}
+
+.sec3 .slide1 {
+  background-image: url(../images/sec3_01.jpg);
+}
+
+.sec3 .slide2 {
+  background-image: url(../images/sec3_02.jpg);
+}
+
+.sec3 .slide3 {
+  background-image: url(../images/sec3_03.jpg);
+}
+
+.sec3 .slide4 {
+  background-image: url(../images/sec3_04.jpg);
+}
+
+.sec3 .slide5 {
+  background-image: url(../images/sec3_05.jpg);
 }
 
 @media screen and (max-width: 768px) {
