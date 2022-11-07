@@ -1,6 +1,18 @@
+let sec2_title = document.querySelector(".sec2 .title");
+let sec2_contents = document.querySelectorAll(".sec2 .content");
+
 window.onscroll = () => {
-  if (window.scrollY > 0) header.classList.add("scroll");
-  else header.classList.remove("scroll");
+  if (window.scrollY > 0) {
+    header.classList.add("scroll");
+    if (window.scrollY > sec2_title.getBoundingClientRect().top * 0.7) {
+      sec2_title.classList.add("scroll");
+    }
+    for (let sec2_content of sec2_contents) {
+      if (window.scrollY > sec2_content.getBoundingClientRect().top * 2) {
+        sec2_content.classList.add("scroll");
+      }
+    }
+  } else header.classList.remove("scroll");
 };
 
 window.onresize = () => {

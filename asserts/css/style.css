@@ -251,6 +251,15 @@ header .depth2 a:hover {
   margin: 0 40px;
 }
 
+.sec2 .title * {
+  transform: translateY(10px);
+  opacity: 0;
+}
+
+.sec2 .title.scroll * {
+  animation: fadeIn 0.4s linear forwards;
+}
+
 .sec2 .title h2 {
   font-size: 3em;
   color: #222;
@@ -263,6 +272,10 @@ header .depth2 a:hover {
   line-height: 1.6;
   max-width: 75%;
   position: relative;
+}
+
+.sec2 .title.scroll p {
+  animation-delay: 0.2s;
 }
 
 .sec2 .title p:before {
@@ -285,8 +298,14 @@ header .depth2 a:hover {
   position: absolute;
   width: 50%;
   height: 120px;
+  background: repeating-linear-gradient(
+    45deg,
+    #ccc,
+    #ccc 1px,
+    transparent 0,
+    transparent 10px
+  );
 }
-/*mark_top mark_bottom : BG(MasK) add*/
 
 .sec2 .mark_top {
   top: 100px;
@@ -294,6 +313,7 @@ header .depth2 a:hover {
 
 .sec2 .mark_bottom {
   bottom: 160px;
+  right: 0;
 }
 
 .sec2 .content {
@@ -302,12 +322,25 @@ header .depth2 a:hover {
   position: relative;
 }
 
+.sec2 .content * {
+  transform: translateY(10px);
+  opacity: 0;
+}
+
+.sec2 .content.scroll * {
+  animation: fadeIn 0.4s linear forwards;
+}
+
 .sec2 .content:not(.content1) {
   margin-top: 180px;
 }
 
 .sec2 .content img {
   width: 68%;
+}
+
+.sec2 .content img.mobile {
+  display: none;
 }
 
 .sec2 .content:nth-child(2n + 1) img {
@@ -322,6 +355,7 @@ header .depth2 a:hover {
   text-align: right;
   background: #fff;
   box-shadow: 2px 2px 5px #aaa;
+  animation-delay: 0.4s;
 }
 
 .sec2 .content .descript h3 {
@@ -536,5 +570,71 @@ header .depth2 a:hover {
     width: 30px;
     height: 4px;
     background: var(--blue);
+  }
+
+  /*Section2*/
+  .sec2 {
+    padding-top: 120px;
+  }
+
+  .sec2 .title h2 {
+    font-size: 2em;
+  }
+
+  .sec2 .title p {
+    padding-left: 45px;
+    font-size: 1em;
+    line-height: 1.2;
+    max-width: 90%;
+  }
+
+  .sec2 .title p:before {
+    width: 30px;
+  }
+
+  .sec2 .content_wrap {
+    padding: 160px 0;
+  }
+
+  .sec2 .mark_top,
+  .sec2 .mark_bottom {
+    position: absolute;
+    width: 80%;
+  }
+
+  .sec2 .mark_bottom {
+    bottom: 100px;
+  }
+
+  .sec2 .content:not(.content1) {
+    margin-top: 140px;
+  }
+
+  .sec2 .content img {
+    display: none;
+    width: 90%;
+    float: right;
+  }
+
+  .sec2 .content img.mobile {
+    display: block;
+  }
+
+  .sec2 .content .descript {
+    position: absolute;
+    top: 70%;
+    width: 75%;
+    padding: 24px 24px 24px 0;
+    text-align: left;
+  }
+
+  .sec2 .content .descript p {
+    line-height: 1.4;
+    font-size: 1em;
+  }
+
+  .sec2 .content:nth-child(2n + 2) .descript {
+    right: auto;
+    left: 0;
   }
 }
