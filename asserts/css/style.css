@@ -573,6 +573,90 @@ header .depth2 a:hover {
   background-image: url(../images/sec3_05.jpg);
 }
 
+/*Section4*/
+.sec4 {
+  padding: 160px 0;
+  margin: 0 40px;
+}
+
+.sec4 .title {
+  text-align: center;
+  font-size: 3em;
+}
+
+.sec4 .content_wrap {
+  padding-top: 10px;
+  position: relative;
+  width: 70%;
+  margin: 50px auto 0;
+}
+
+.sec4 .btn_all {
+  position: absolute;
+  top: -20px;
+  right: 0;
+  font-size: 1em;
+  color: #888;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.sec4 .btn_all:hover {
+  color: var(--blue);
+}
+
+.sec4 ul {
+  height: 260px;
+  overflow: hidden;
+}
+
+.sec4 li {
+  padding: 12px 20px;
+}
+
+.sec4 li:first-child {
+  background: var(--blue);
+  border-radius: 10px;
+  padding: 17px 20px;
+  position: relative;
+}
+
+.sec4 li:first-child:after,
+.sec4 li:first-child:before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  width: 12px;
+  height: 2px;
+  background: #fff;
+  transform-origin: right;
+}
+
+.sec4 li:first-child:after {
+  transform: rotate(45deg);
+}
+
+.sec4 li:first-child:before {
+  transform: rotate(-45deg);
+}
+
+.sec4 li:first-child a {
+  color: #fff;
+  display: block;
+}
+
+.sec4 li a {
+  display: block;
+  color: #ccc;
+  font-size: 1.2em;
+  transition: 0.3s;
+}
+
+.sec4 li a:hover {
+  color: #777;
+}
+
 @media screen and (max-width: 980px) {
   .sec3 .slide_wrap {
     overflow: visible;
