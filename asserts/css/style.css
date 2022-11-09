@@ -383,15 +383,18 @@ header .depth2 a:hover {
   padding: 160px 0 120px;
   margin: 0 40px;
   overflow: hidden;
+  background: #f6f6f6;
 }
 
-/* .sec3 .title.scroll * {
+.sec3 .title.scroll * {
   animation: fadeIn 0.4s linear forwards;
-} */
+}
 
 .sec3 .title h2 {
   font-size: 3em;
   color: #222;
+  transform: translateY(10px);
+  opacity: 0;
 }
 
 .sec3 .title p {
@@ -401,6 +404,12 @@ header .depth2 a:hover {
   line-height: 1.6;
   max-width: 75%;
   position: relative;
+  transform: translateY(10px);
+  opacity: 0;
+}
+
+.sec3 .title.scroll p {
+  animation-delay: 0.2s;
 }
 
 .sec3 .title p:before {
@@ -414,10 +423,16 @@ header .depth2 a:hover {
 }
 
 .sec3 .slide_wrap {
-  padding: 120px 30px;
+  padding: 80px 20px;
   margin: 0 30px;
   overflow: hidden;
   position: relative;
+  transform: translateY(300px);
+  opacity: 0;
+}
+
+.sec3 .slide_wrap.scroll {
+  animation: fadeIn 0.4s linear forwards;
 }
 
 .sec3 .btn_slide {
@@ -464,6 +479,30 @@ header .depth2 a:hover {
   right: 0;
 }
 
+.sec3 .pagination {
+  display: flex;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 60%;
+  height: 3px;
+  transform: translate(-50%, 0);
+  background: #aaa;
+}
+
+.sec3 .btn_page:hover {
+  background: var(--blue);
+}
+
+.sec3 .btn_page.active {
+  background: var(--blue);
+}
+
+.sec3 .pagination .btn_page {
+  flex: 1;
+  cursor: pointer;
+}
+
 .sec3 .slide_wrap ul {
   display: flex;
   width: 165%;
@@ -478,12 +517,8 @@ header .depth2 a:hover {
   background-repeat: no-repeat;
   background-position: center;
   border-radius: 20px;
-  filter: brightness(0.7);
-}
-
-.sec3 .slide.active {
-  transform: scale(1.2);
-  filter: unset;
+  user-select: none;
+  -webkit-user-select: none;
 }
 
 .sec3 .descript_wrap {
@@ -536,6 +571,26 @@ header .depth2 a:hover {
 
 .sec3 .slide5 {
   background-image: url(../images/sec3_05.jpg);
+}
+
+@media screen and (max-width: 980px) {
+  .sec3 .slide_wrap {
+    overflow: visible;
+  }
+
+  .sec3 .btn_slide {
+    display: none;
+  }
+
+  .sec3 .slide_wrap ul {
+    display: flex;
+    width: 500%;
+    transition: all 0.3s;
+  }
+
+  .sec3 .slide {
+    margin: 0 10px;
+  }
 }
 
 @media screen and (max-width: 768px) {
@@ -796,5 +851,34 @@ header .depth2 a:hover {
   .sec2 .content:nth-child(2n + 2) .descript {
     right: auto;
     left: 0;
+  }
+
+  /*Section3*/
+  .sec3 {
+    padding: 120px 0;
+    margin: 0;
+  }
+
+  .sec3 .title {
+    margin: 0 40px;
+  }
+
+  .sec3 .title h2 {
+    font-size: 2em;
+  }
+
+  .sec3 .title p {
+    padding-left: 50px;
+    font-size: 1em;
+    line-height: 1.4;
+    max-width: 90%;
+  }
+
+  .sec3 .title p:before {
+    width: 30px;
+  }
+
+  .sec3 .slide_wrap {
+    margin: 0 20px;
   }
 }

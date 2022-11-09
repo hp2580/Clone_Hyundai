@@ -1,5 +1,12 @@
 let sec2_title = document.querySelector(".sec2 .title");
 let sec2_contents = document.querySelectorAll(".sec2 .content");
+let sec3_title = document.querySelector(".sec3 .title");
+let sec3_content = document.querySelector(".sec3 .slide_wrap");
+
+window.onload = () => {
+  slide.style.transform = `translateX(0px)`;
+  btnPages[0].classList.add("active");
+};
 
 window.onscroll = () => {
   if (window.scrollY > 0) {
@@ -11,6 +18,12 @@ window.onscroll = () => {
       if (window.scrollY > sec2_content.getBoundingClientRect().top * 2) {
         sec2_content.classList.add("scroll");
       }
+    }
+    if (sec3_title.getBoundingClientRect().top < 600) {
+      sec3_title.classList.add("scroll");
+    }
+    if (sec3_content.getBoundingClientRect().top < 600) {
+      sec3_content.classList.add("scroll");
     }
   } else header.classList.remove("scroll");
 };
@@ -27,4 +40,5 @@ window.onresize = () => {
     btnMenu.children[2].style.top = "auto";
     btnMenu.children[2].style.transform = "unset";
   }
+  slideList();
 };

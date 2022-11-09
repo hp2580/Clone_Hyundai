@@ -4,7 +4,14 @@ let menus = document.querySelectorAll(".menu");
 let btnMenu = btnWrap.children[0];
 let btnSlides = document.querySelectorAll(".btn_slide");
 let slide = document.querySelector(".slide_wrap ul");
+let slideContents = document.querySelectorAll(".slide");
+let btnPages = document.querySelectorAll(".btn_page");
 let currentSlide = 0;
+let currentIndex = 0;
+let slideWidth;
+let prevPointer;
+let nextPointer;
+let isDrag = true;
 
 header.addEventListener("mouseenter", () => {
   if (window.innerWidth > 768) {
@@ -52,16 +59,56 @@ for (let menu of menus) {
 }
 
 for (let btnSlide of btnSlides) {
-  let slideWidth = slide.getBoundingClientRect().width / slide.children.length;
   btnSlide.addEventListener("click", (e) => {
-    if (e.target.classList.contains("btn_prev")) {
-      currentSlide += slideWidth;
-      if (currentSlide > 0) currentSlide = -(slideWidth * 4);
-    } else {
-      currentSlide -= slideWidth;
-      if (currentSlide < -(slideWidth * 4)) currentSlide = 0;
+    if (e.target.classList.contains("btn_prev"))
+      currentIndex = currentIndex <= 0 ? 4 : currentIndex - 1;
+    else currentIndex = currentIndex >= 4 ? 0 : currentIndex + 1;
+    slideList();
+    clearActive2(btnPages);
+    btnPages[currentIndex].classList.add("active");
+  });
+}
+
+for (let slideContent of slideContents) {
+  slideContent.addEventListener("mousedown", (e) => {
+    if (isDrag) {
+      isDrag = false;
+      prevPointer = e.screenX;
     }
-    slide.style.transform = `translateX(${currentSlide}px)`;
+  });
+
+  slideContent.addEventListener("mouseup", (e) => {
+    nextPointer = e.screenX;
+    if (prevPointer - nextPointer > 10) {
+      currentIndex = currentIndex >= 4 ? 0 : currentIndex + 1;
+    } else if (prevPointer - nextPointer < -10) {
+      currentIndex = currentIndex <= 0 ? 4 : currentIndex - 1;
+    }
+    slideList();
+    clearActive2(btnPages);
+    btnPages[currentIndex].classList.add("active");
+    setTimeout(() => {
+      isDrag = true;
+    }, 500);
+  });
+}
+
+for (let btnPage of btnPages) {
+  btnPage.addEventListener("click", ({ target }) => {
+    clearActive2(btnPages);
+    target.classList.add("active");
+    if (target.classList.contains("page1")) {
+      currentIndex = 0;
+    } else if (target.classList.contains("page2")) {
+      currentIndex = 1;
+    } else if (target.classList.contains("page3")) {
+      currentIndex = 2;
+    } else if (target.classList.contains("page4")) {
+      currentIndex = 3;
+    } else {
+      currentIndex = 4;
+    }
+    slideList();
   });
 }
 
@@ -74,4 +121,15 @@ function clearActive(elements) {
     element.classList.remove("active");
     element.nextElementSibling.classList.remove("active");
   }
+}
+
+function clearActive2(elements) {
+  for (let element of elements) {
+    element.classList.remove("active");
+  }
+}
+
+function slideList() {
+  slideWidth = slide.getBoundingClientRect().width / slide.children.length;
+  slide.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
 }
