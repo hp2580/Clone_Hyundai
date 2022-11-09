@@ -112,6 +112,14 @@ for (let btnPage of btnPages) {
   });
 }
 
+setInterval(() => {
+  let clone = document
+    .querySelector(".sec4 ul")
+    .firstElementChild.cloneNode(true);
+  document.querySelector(".sec4 ul").firstElementChild.remove();
+  document.querySelector(".sec4 ul").appendChild(clone);
+}, 3000);
+
 /**
  *
  * @param {*} elements Active class를 clear시킬 elements

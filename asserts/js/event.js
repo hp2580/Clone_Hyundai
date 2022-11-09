@@ -2,6 +2,8 @@ let sec2_title = document.querySelector(".sec2 .title");
 let sec2_contents = document.querySelectorAll(".sec2 .content");
 let sec3_title = document.querySelector(".sec3 .title");
 let sec3_content = document.querySelector(".sec3 .slide_wrap");
+let sec4_title = document.querySelector(".sec4 .title");
+let sec4_content = document.querySelector(".sec4 .content_wrap");
 
 window.onload = () => {
   slide.style.transform = `translateX(0px)`;
@@ -24,6 +26,10 @@ window.onscroll = () => {
     }
     if (sec3_content.getBoundingClientRect().top < 600) {
       sec3_content.classList.add("scroll");
+    }
+    if (sec4_title.getBoundingClientRect().top < 400) {
+      sec4_title.classList.add("scroll");
+      sec4_content.classList.add("scroll");
     }
   } else header.classList.remove("scroll");
 };
