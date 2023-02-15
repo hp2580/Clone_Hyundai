@@ -29,3 +29,7 @@ select {
   outline: 0;
   background: transparent;
 }
+
+.hidden {
+  overflow: hidden;
+}

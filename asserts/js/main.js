@@ -1,13 +1,14 @@
-let header = document.querySelector("header");
-let btnWrap = document.querySelector(".btn_menu");
-let menus = document.querySelectorAll(".menu");
-let btnMenu = btnWrap.children[0];
-let btnSlides = document.querySelectorAll(".btn_slide");
-let slide = document.querySelector(".slide_wrap ul");
-let slideContents = document.querySelectorAll(".slide");
-let btnPages = document.querySelectorAll(".btn_page");
+const header = document.querySelector("header");
+const btnWrap = document.querySelector(".btn_menu");
+const menus = document.querySelectorAll(".depth1 li");
+const btnMenu = btnWrap.children[0];
+const btnSlides = document.querySelectorAll(".btn_slide");
+const slide = document.querySelector(".slide_wrap ul");
+const slideContents = document.querySelectorAll(".slide");
+const paginations = document.querySelectorAll(".btn_page");
 let currentSlide = 0;
-let currentIndex = 0;
+let index = 1;
+let indexPage = 0;
 let slideWidth;
 let prevPointer;
 let nextPointer;
@@ -26,48 +27,45 @@ header.addEventListener("mouseleave", () => {
 
 btnWrap.addEventListener("click", (e) => {
   if (!btnMenu.classList.contains("active")) {
+    document.body.classList.add("hidden");
     btnMenu.classList.add("active");
     header.classList.add("active");
-    btnMenu.children[0].style.top = "50%";
-    btnMenu.children[0].style.transform = "rotate(-45deg)";
-    btnMenu.children[1].style.opacity = "0";
-    btnMenu.children[2].style.top = "50%";
-    btnMenu.children[2].style.transform = "rotate(45deg)";
+    clearActive(menus);
   } else {
+    document.body.classList.remove("hidden");
     btnMenu.classList.remove("active");
     header.classList.remove("active");
-    btnMenu.children[0].style.top = "0";
-    btnMenu.children[0].style.transform = "unset";
-    btnMenu.children[1].style.opacity = "1";
-    btnMenu.children[2].style.top = "auto";
-    btnMenu.children[2].style.transform = "unset";
   }
 });
 
-for (let menu of menus) {
+menus.forEach((menu) => {
   menu.addEventListener("click", (e) => {
     e.preventDefault();
     if (menu.classList.contains("active")) {
       menu.classList.remove("active");
-      menu.nextElementSibling.classList.remove("active");
     } else {
       clearActive(menus);
       menu.classList.add("active");
-      menu.nextElementSibling.classList.add("active");
     }
   });
-}
+});
 
-for (let btnSlide of btnSlides) {
-  btnSlide.addEventListener("click", (e) => {
-    if (e.target.classList.contains("btn_prev"))
-      currentIndex = currentIndex <= 0 ? 4 : currentIndex - 1;
-    else currentIndex = currentIndex >= 4 ? 0 : currentIndex + 1;
-    slideList();
-    clearActive2(btnPages);
-    btnPages[currentIndex].classList.add("active");
+btnSlides.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    const max = 4;
+    if (btn.classList.contains("btn_prev")) {
+      index--;
+      indexPage--;
+      if (indexPage < 0) indexPage = max;
+    } else {
+      index++;
+      indexPage++;
+      if (indexPage > max) indexPage = 0;
+    }
+    clearActive(paginations);
+    paginations[indexPage].classList.add("active");
   });
-}
+});
 
 for (let slideContent of slideContents) {
   slideContent.addEventListener("mousedown", (e) => {
@@ -80,13 +78,13 @@ for (let slideContent of slideContents) {
   slideContent.addEventListener("mouseup", (e) => {
     nextPointer = e.screenX;
     if (prevPointer - nextPointer > 10) {
-      currentIndex = currentIndex >= 4 ? 0 : currentIndex + 1;
+      index = index >= 4 ? 0 : index + 1;
     } else if (prevPointer - nextPointer < -10) {
-      currentIndex = currentIndex <= 0 ? 4 : currentIndex - 1;
+      index = index <= 0 ? 4 : index - 1;
     }
     slideList();
     clearActive2(btnPages);
-    btnPages[currentIndex].classList.add("active");
+    btnPages[index].classList.add("active");
     setTimeout(() => {
       isDrag = true;
     }, 500);
@@ -98,15 +96,15 @@ for (let btnPage of btnPages) {
     clearActive2(btnPages);
     target.classList.add("active");
     if (target.classList.contains("page1")) {
-      currentIndex = 0;
+      index = 0;
     } else if (target.classList.contains("page2")) {
-      currentIndex = 1;
+      index = 1;
     } else if (target.classList.contains("page3")) {
-      currentIndex = 2;
+      index = 2;
     } else if (target.classList.contains("page4")) {
-      currentIndex = 3;
+      index = 3;
     } else {
-      currentIndex = 4;
+      index = 4;
     }
     slideList();
   });
@@ -120,24 +118,13 @@ setInterval(() => {
   document.querySelector(".sec4 ul").appendChild(clone);
 }, 3000);
 
-/**
- *
- * @param {*} elements Active class를 clear시킬 elements
- */
-function clearActive(elements) {
-  for (let element of elements) {
-    element.classList.remove("active");
-    element.nextElementSibling.classList.remove("active");
-  }
-}
-
-function clearActive2(elements) {
-  for (let element of elements) {
-    element.classList.remove("active");
-  }
+function clearActive(element) {
+  element.forEach((ele) => {
+    ele.classList.remove("active");
+  });
 }
 
 function slideList() {
   slideWidth = slide.getBoundingClientRect().width / slide.children.length;
-  slide.style.transform = `translateX(-${currentIndex * slideWidth}px)`;
+  slide.style.transform = `translateX(-${index * slideWidth}px)`;
 }

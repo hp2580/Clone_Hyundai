@@ -6,8 +6,15 @@ let sec4_title = document.querySelector(".sec4 .title");
 let sec4_content = document.querySelector(".sec4 .content_wrap");
 
 window.onload = () => {
-  slide.style.transform = `translateX(0px)`;
-  btnPages[0].classList.add("active");
+  const first = slide.firstElementChild.cloneNode(true);
+  const last = slide.lastElementChild.cloneNode(true);
+  slide.append(first);
+  slide.prepend(last);
+
+  slide.style.width = `${(slide.childElementCount * 100) / 2}%`;
+  slide.style.transform = `translateX(-${
+    (100 / slide.childElementCount / 2) * index
+  }%)`;
 };
 
 window.onscroll = () => {
@@ -38,13 +45,8 @@ window.onresize = () => {
   if (window.innerWidth < 768) {
   } else {
     header.classList.remove("active");
-    clearActive(menus);
-    btnWrap.children[0].classList.remove("active");
-    btnMenu.children[0].style.top = "0";
-    btnMenu.children[0].style.transform = "unset";
-    btnMenu.children[1].style.opacity = "1";
-    btnMenu.children[2].style.top = "auto";
-    btnMenu.children[2].style.transform = "unset";
+    clearactive(menus);
+    btnWrap.firstElementChild.classList.remove("active");
   }
   slideList();
 };

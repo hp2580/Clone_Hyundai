@@ -25,7 +25,7 @@ header.active {
 
 header.scroll {
   background: #fff;
-  box-shadow: 0 1px 30px #ccc;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.3);
 }
 
 header .container {
@@ -75,8 +75,6 @@ header .btn_menu .wrap span {
   width: 100%;
   height: 2px;
   background: #fff;
-  transform-origin: top;
-  transition: 0.3s;
 }
 
 header .btn_menu .wrap.active span {
@@ -97,6 +95,22 @@ header .btn_menu .wrap span:nth-child(2) {
 
 header .btn_menu .wrap span:nth-child(3) {
   bottom: 0;
+}
+
+header .btn_menu .wrap.active span:nth-child(1) {
+  top: 50%;
+  transform: rotate(45deg);
+  transition: all 0.3s ease;
+}
+
+header .btn_menu .wrap.active span:nth-child(2) {
+  opacity: 0;
+}
+
+header .btn_menu .wrap.active span:nth-child(3) {
+  top: 50%;
+  transform: rotate(-45deg);
+  transition: all 0.3s ease;
 }
 
 header nav {
@@ -441,7 +455,7 @@ header .depth2 a:hover {
 .sec3 .btn_slide {
   position: absolute;
   top: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-25%, -50%);
   width: 40px;
   height: 40px;
   cursor: pointer;
@@ -460,8 +474,8 @@ header .depth2 a:hover {
   top: 0;
   left: 0;
   width: 100%;
-  height: 2px;
-  background: #aaa;
+  height: 3px;
+  background: var(--blue);
   transform-origin: left;
 }
 
@@ -824,7 +838,7 @@ footer .copyright {
     position: relative;
   }
 
-  header.active .depth1 .menu.active {
+  header.active .depth1 .li.active .menu {
     color: var(--blue);
   }
 
@@ -839,8 +853,8 @@ footer .copyright {
     background: #000;
   }
 
-  header.active .depth1 .menu.active:after,
-  header.active .depth1 .menu.active:before {
+  header.active .depth1 li.active .menu:after,
+  header.active .depth1 li.active .menu:before {
     background: var(--blue);
   }
 
@@ -849,7 +863,7 @@ footer .copyright {
     transition: 0.3s;
   }
 
-  header.active .depth1 .menu.active:after {
+  header.active .depth1 li.active .menu:after {
     transform: rotate(0);
   }
 
@@ -873,7 +887,7 @@ footer .copyright {
     padding-left: 30px;
   }
 
-  header .depth2.active {
+  header li.active .depth2 {
     height: fit-content;
   }
 
