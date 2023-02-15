@@ -78,6 +78,20 @@ slide.addEventListener("mouseup", ({ clientX }) => {
   }
 });
 
+slide.addEventListener("touchstart", ({ changedTouches }) => {
+  if (transitionEnd) prevX = changedTouches[0].clientX;
+});
+
+slide.addEventListener("touchend", ({ changedTouches }) => {
+  if (transitionEnd) {
+    let direction = changedTouches[0].clientX - prevX;
+    if (direction > 100 || direction < -100) {
+      moveSlide(direction);
+      transitionEnd = false;
+    }
+  }
+});
+
 slide.addEventListener("transitionend", () => {
   if (index > slide.childElementCount - 3) {
     index = 2;

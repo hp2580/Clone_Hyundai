@@ -512,7 +512,7 @@ header .depth2 a:hover {
 }
 
 .sec3 .btn_page.active {
-  background: var(--blue);
+  background: var(--blue) !important;
 }
 
 .sec3 .pagination .btn_page {
@@ -1074,6 +1074,10 @@ footer .copyright {
 
   .sec3 .slide_wrap {
     margin: 0 20px;
+  }
+
+  .sec3 .btn_page:hover {
+    background: none;
   }
 
   /*Section4*/
