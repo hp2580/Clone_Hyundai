@@ -270,7 +270,7 @@ header .depth2 a:hover {
   opacity: 0;
 }
 
-.sec2 .title.scroll * {
+.sec2 .title * {
   animation: fadeIn 0.4s linear forwards;
 }
 
