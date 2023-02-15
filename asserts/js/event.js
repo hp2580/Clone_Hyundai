@@ -4,17 +4,33 @@ let sec3_title = document.querySelector(".sec3 .title");
 let sec3_content = document.querySelector(".sec3 .slide_wrap");
 let sec4_title = document.querySelector(".sec4 .title");
 let sec4_content = document.querySelector(".sec4 .content_wrap");
+let width;
+let startPoint;
 
 window.onload = () => {
   const first = slide.firstElementChild.cloneNode(true);
+  const first2 = slide.firstElementChild.nextElementSibling.cloneNode(true);
   const last = slide.lastElementChild.cloneNode(true);
+  const last2 = slide.lastElementChild.previousElementSibling.cloneNode(true);
   slide.append(first);
+  slide.append(first2);
   slide.prepend(last);
+  slide.prepend(last2);
 
-  slide.style.width = `${(slide.childElementCount * 100) / 2}%`;
-  slide.style.transform = `translateX(-${
-    (100 / slide.childElementCount / 2) * index
-  }%)`;
+  width = 100 / slide.childElementCount;
+  startPoint = width / 2;
+
+  if (window.innerWidth > 768) {
+    slide.style.width = `${(slide.childElementCount * 100) / 2}%`;
+    slide.style.transform = `translateX(-${width * index - startPoint}%)`;
+  } else {
+    slide.style.width = `${slide.childElementCount * 100}%`;
+    slide.style.transform = `translateX(-${width * index}%)`;
+  }
+
+  setTimeout(() => {
+    slide.style.transition = `transform .4s linear`;
+  });
 };
 
 window.onscroll = () => {
@@ -42,11 +58,17 @@ window.onscroll = () => {
 };
 
 window.onresize = () => {
+  width = 100 / slide.childElementCount;
+  moveSlide();
+  moveBySize();
   if (window.innerWidth < 768) {
+    slide.style.width = `${slide.childElementCount * 100}%`;
+    slide.style.transform = `translateX(-${width * index}%)`;
   } else {
     header.classList.remove("active");
-    clearactive(menus);
+    clearActive(menus);
     btnWrap.firstElementChild.classList.remove("active");
+    slide.style.width = `${(slide.childElementCount * 100) / 2}%`;
+    slide.style.transform = `translateX(-${width * index - startPoint}%)`;
   }
-  slideList();
 };

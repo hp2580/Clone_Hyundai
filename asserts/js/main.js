@@ -4,14 +4,13 @@ const menus = document.querySelectorAll(".depth1 li");
 const btnMenu = btnWrap.children[0];
 const btnSlides = document.querySelectorAll(".btn_slide");
 const slide = document.querySelector(".slide_wrap ul");
-const slideContents = document.querySelectorAll(".slide");
 const paginations = document.querySelectorAll(".btn_page");
 let currentSlide = 0;
-let index = 1;
+let index = 2;
 let indexPage = 0;
 let slideWidth;
-let prevPointer;
-let nextPointer;
+let prevX;
+let transitionEnd = true;
 let isDrag = true;
 
 header.addEventListener("mouseenter", () => {
@@ -52,63 +51,66 @@ menus.forEach((menu) => {
 
 btnSlides.forEach((btn) => {
   btn.addEventListener("click", () => {
-    const max = 4;
-    if (btn.classList.contains("btn_prev")) {
-      index--;
-      indexPage--;
-      if (indexPage < 0) indexPage = max;
-    } else {
-      index++;
-      indexPage++;
-      if (indexPage > max) indexPage = 0;
+    if (transitionEnd) {
+      transitionEnd = false;
+      if (btn.classList.contains("btn_prev")) {
+        moveSlide("prev");
+      } else {
+        moveSlide("next");
+      }
+      clearActive(paginations);
+      paginations[indexPage].classList.add("active");
     }
-    clearActive(paginations);
-    paginations[indexPage].classList.add("active");
   });
 });
 
-for (let slideContent of slideContents) {
-  slideContent.addEventListener("mousedown", (e) => {
-    if (isDrag) {
-      isDrag = false;
-      prevPointer = e.screenX;
-    }
-  });
+slide.addEventListener("mousedown", ({ clientX }) => {
+  if (transitionEnd) prevX = clientX;
+});
 
-  slideContent.addEventListener("mouseup", (e) => {
-    nextPointer = e.screenX;
-    if (prevPointer - nextPointer > 10) {
-      index = index >= 4 ? 0 : index + 1;
-    } else if (prevPointer - nextPointer < -10) {
-      index = index <= 0 ? 4 : index - 1;
+slide.addEventListener("mouseup", ({ clientX }) => {
+  if (transitionEnd) {
+    let direction = clientX - prevX;
+    if (direction > 100 || direction < -100) {
+      moveSlide(direction);
+      transitionEnd = false;
     }
-    slideList();
-    clearActive2(btnPages);
-    btnPages[index].classList.add("active");
-    setTimeout(() => {
-      isDrag = true;
-    }, 500);
-  });
-}
+  }
+});
 
-for (let btnPage of btnPages) {
-  btnPage.addEventListener("click", ({ target }) => {
-    clearActive2(btnPages);
-    target.classList.add("active");
-    if (target.classList.contains("page1")) {
-      index = 0;
-    } else if (target.classList.contains("page2")) {
-      index = 1;
-    } else if (target.classList.contains("page3")) {
-      index = 2;
-    } else if (target.classList.contains("page4")) {
-      index = 3;
+slide.addEventListener("transitionend", () => {
+  if (index > slide.childElementCount - 3) {
+    index = 2;
+    slide.style.transition = ``;
+    moveBySize();
+  } else if (index < 2) {
+    index = slide.childElementCount - 3;
+    slide.style.transition = ``;
+    moveBySize();
+  }
+  setTimeout(() => {
+    slide.style.transition = `transform .4s ease`;
+    transitionEnd = true;
+  });
+});
+
+paginations.forEach((btn) => {
+  btn.addEventListener("click", () => {
+    let str = Array.from(btn.classList)
+      .filter((name) => name.startsWith("page"))
+      .toString();
+    let num = +str.charAt(str.length - 1);
+    if (num == 1 && index == 6) {
+      index += 1;
+    } else if (num == 5 && index == 2) {
+      index -= 1;
     } else {
-      index = 4;
+      index = num + 1;
     }
-    slideList();
+    indexPage = num - 1;
+    moveSlide();
   });
-}
+});
 
 setInterval(() => {
   let clone = document
@@ -124,7 +126,27 @@ function clearActive(element) {
   });
 }
 
-function slideList() {
-  slideWidth = slide.getBoundingClientRect().width / slide.children.length;
-  slide.style.transform = `translateX(-${index * slideWidth}px)`;
+function moveBySize() {
+  if (window.innerWidth > 768) {
+    slide.style.transform = `translateX(-${width * index - startPoint}%)`;
+  } else {
+    slide.style.transform = `translateX(-${width * index}%)`;
+  }
+}
+
+function moveSlide(dir) {
+  let max = 4;
+  if (dir > 100 || dir == "prev") {
+    index--;
+    indexPage--;
+    if (indexPage < 0) indexPage = max;
+  } else if (dir < -100 || dir == "next") {
+    index++;
+    indexPage++;
+    if (indexPage > max) indexPage = 0;
+  }
+
+  clearActive(paginations);
+  paginations[indexPage].classList.add("active");
+  moveBySize();
 }

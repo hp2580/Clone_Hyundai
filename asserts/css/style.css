@@ -523,7 +523,6 @@ header .depth2 a:hover {
 .sec3 .slide_wrap ul {
   display: flex;
   width: 165%;
-  transition: all 0.3s;
 }
 
 .sec3 .slide {
@@ -780,8 +779,7 @@ footer .copyright {
 
   .sec3 .slide_wrap ul {
     display: flex;
-    width: 500%;
-    transition: all 0.3s;
+    /* transition: all 0.3s; */
   }
 
   .sec3 .slide {
