@@ -48,28 +48,18 @@ window.onload = () => {
 window.onscroll = () => {
   if (window.scrollY > 0) {
     header.classList.add("scroll");
-    // if (window.scrollY > sec2_title.getBoundingClientRect().top * 0.7) {
-    //   sec2_title.classList.add("scroll");
-    // }
-    // for (let sec2_content of sec2_contents) {
-    //   if (window.scrollY > sec2_content.getBoundingClientRect().top * 2) {
-    //     sec2_content.classList.add("scroll");
-    //   }
-    // }
-    // if (sec3_title.getBoundingClientRect().top < 600) {
-    //   sec3_title.classList.add("scroll");
-    // }
-    // if (sec3_content.getBoundingClientRect().top < 600) {
-    //   sec3_content.classList.add("scroll");
-    // }
-    // if (sec4_title.getBoundingClientRect().top < 400) {
-    //   sec4_title.classList.add("scroll");
-    //   sec4_content.classList.add("scroll");
-    // }
+    console.log(
+      document.querySelector(".content1").getBoundingClientRect().top
+    );
     arrFade.forEach((element) => {
-      if (element.getBoundingClientRect().top * 1.5 < window.scrollY) {
+      const top = element.getBoundingClientRect().top;
+      if (top * 0.7 < window.innerHeight / 2) {
         if (!element.classList.contains("scroll")) {
           element.classList.add("scroll");
+        }
+      } else if (top >= window.innerHeight * 0.9) {
+        if (element.classList.contains("scroll")) {
+          element.classList.remove("scroll");
         }
       }
     });
